@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoGlass - Профессиональная замена автостекол</title>
+    <style>
+        :root {
+            --primary-color: #2C3E50;
+            --accent-color: #3498DB;
+            --light-color: #ECF0F1;
+            --text-color: #333333;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+            padding: 0 10px;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        .cta-button {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            background-color: #2980B9;
+        }
+        
+        /* Hero section */
+        .hero {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 120px 0 60px;
+            }
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Benefits section */
+        .benefits {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary-color);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .benefit-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 30px;
+        }
+        
+        .benefit-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        /* Gallery section */
+        .gallery {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 250px;
+            cursor: pointer;
+        }
+        
+        .gallery-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s;
+        }
+        
+        .gallery-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        
+        @media (hover: hover) {
+            .gallery-item:hover .gallery-thumbnail {
+                opacity: 0;
+            }
+            
+            .gallery-item:hover .gallery-video {
+                display: block;
+            }
+        }
+        
+        /* For touch devices */
+        @media (hover: none) {
+            .gallery-item.tap-active {
+                pointer-events: none;
+            }
+            .gallery-item.tap-active .gallery-thumbnail {
+                opacity: 0;
+            }
+            .gallery-item.tap-active .gallery-video {
+                display: block;
+            }
+        }
+        
+        /* Pricing section */
+        .pricing {
+            padding: 80px 0;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .price-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border-top: 4px solid var(--accent-color);
+        }
+        
+        .price-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .price {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .price-card ul {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .price-card ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Contacts section */
+        .contacts {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            margin-right: 15px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        .contact-form textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+                margin: 10px 0;
+                padding: 5px;
+            }
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            .contact-form input,
+            .contact-form textarea {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Auto<span>Glass</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="#benefits">Преимущества</a></li>
+                        <li><a href="#gallery">Наши работы</a></li>
+                        <!-- <li><a href="#pricing">Цены</a></li> -->
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </nav>
+                <a href="#contacts" class="cta-button">Позвонить</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Профессиональная замена автостекол</h1>
+            <p>Быстро, качественно и с гарантией. Вернем прозрачность вашему обзору с использованием оригинальных материалов и современных технологий.</p>
+            <a href="#contacts" class="cta-button">Оставить заявку</a>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <h2 class="section-title">Наши преимущества</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">✓</div>
+                    <h3>Оригинальные стекла</h3>
+                    <p>Работаем только с проверенными поставщиками и используем оригинальные стекла или качественные аналоги.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">24/7</div>
+                    <h3>Экспресс-замена</h3>
+                    <p>Замена лобового стекла за 60 минут с выездом к вам или в нашем сервисе.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">+</div>
+                    <h3>Без сквозняков</h3>
+                    <p>Герметичная установка исключает появление свиста и сквозняков на высоких скоростях.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">%</div>
+                    <h3>Гарантия 3 года</h3>
+                    <p>Предоставляем официальную гарантию на все виды работ по замене автостекол.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Наши работы</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img class="gallery-thumbnail" src="thumbnails/Монтажная область 1.png" alt="Процесс замены стекла">
+                    <video class="gallery-video" loop muted>
+                        <source src="videos/lx460h.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0be45b5f-15cd-4e5d-9449-c30f6e354eee.png" alt="Трещина на лобовом стекле автомобиля после попадания камня">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ef631a3f-103a-490a-b2e6-8bad7f731dee.png" alt="Готовый результат замены стекла на новом внедорожнике">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fef22e6a-3e12-447a-b27c-6288febdc4cd.png" alt="Мастер аккуратно устанавливает новое боковое стекло в дверь автомобиля">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5b4ebb80-eb34-4328-bc67-4d42fb092565.png" alt="Сравнение старого разбитого стекла и нового готового к установке">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ed45fdba-7d58-46c6-b1f6-1c31c888acdf.png" alt="Автомобиль с новым лобовым стеклом на фоне современного сервисного центра">
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- 
+    Pricing Section
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Наши цены</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Лобовое стекло</h3>
+                    <div class="price">от 8 000 ₽</div>
+                    <ul>
+                        <li>Легковые автомобили</li>
+                        <li>Оригинальное стекло</li>
+                        <li>Герметик последнего поколения</li>
+                        <li>Гарантия 2 года</li>
+                    </ul>
+                    <a href="#contacts" class="cta-button">Заказать</a>
+                </div>
+                <div class="price-card">
+                    <h3>Боковое стекло</h3>
+                    <div class="price">от 5 000 ₽</div>
+                    <ul>
+                        <li>Легковые автомобили</li>
+                        <li>Стекло с заводской тонировкой</li>
+                        <li>Быстрая замена</li>
+                        <li>Гарантия 1 год</li>
+                    </ul>
+                    <a href="#contacts" class="cta-button">Заказать</a>
+                </div>
+                <div class="price-card">
+                    <h3>Заднее стекло</h3>
+                    <div class="price">от 12 000 ₽</div>
+                    <ul>
+                        <li>Легковые автомобили</li>
+                        <li>С подогревом</li>
+                        <li>С заводской антенной</li>
+                        <li>Гарантия 2 года</li>
+                    </ul>
+                    <a href="#contacts" class="cta-button">Заказать</a>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Contacts Section -->
+    <section class="contacts" id="contacts">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Свяжитесь с нами</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">@</div>
+                        <div>
+                            <strong>Адрес:</strong> г. Бишкек, Рынок Дордой (Автостекла), ул. Кожевенная, 76/2
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✆</div>
+                        <div>
+                            <strong>Телефон:</strong> +996 (500) 52-95-55
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉</div>
+                        <div>
+                            <strong>Email:</strong> vante@mail.ru
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🕒</div>
+                        <div>
+                            <strong>Режим работы:</strong> Пн-Вс: 9:00-15:00
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Оставьте заявку</h3>
+                    <form id="requestForm">
+                        <input type="text" placeholder="Ваше имя" required>
+                        <input type="tel" placeholder="Ваш телефон" required>
+                        <input type="email" placeholder="Ваш email">
+                        <textarea placeholder="Опишите проблему или выберите услугу"></textarea>
+                        <button type="submit" class="cta-button">Отправить</button>
+                    </form>
+                </div>
+            </div>
+            <div class="map" style="margin-top: 40px; height: 450px; background-color: #ddd; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d730.1362177973625!2d74.6187782!3d42.9457209!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389ec92c5cf8e9db%3A0xe1686abe0c88d57e!2z0JvQvtCx0L7QstGL0LUg0YHRgtC10LrQu9CwICjQsNCy0YLQvtGB0YLQtdC60LvQsCkuINCj0YHRgtCw0L3QvtCy0LrQsCDQsNCy0YLQvtGB0YLQtdC60L7Quy4g0JLRi9C10LfQtC4g0JTQvtGA0LTQvtC5!5e0!3m2!1sru!2skg!4v1751962549093!5m2!1sru!2skg" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+        </div>  -->
+                <a class="dg-widget-link" href="http://2gis.kg/bishkek/firm/70000001019320323/center/74.62008476257326,42.94511439522653/zoom/16?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap">Посмотреть на карте Бишкека</a><div class="dg-widget-link"><a href="http://2gis.kg/bishkek/firm/70000001019320323/photos/70000001019320323/center/74.62008476257326,42.94511439522653/zoom/17?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=photos">Фотографии компании</a></div><div class="dg-widget-link"><a href="http://2gis.kg/bishkek/center/74.620079,42.944532/zoom/16/routeTab/rsType/bus/to/74.620079,42.944532╎Центр установки и продажи автостекол?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route">Найти проезд до Центр установки и продажи автостекол</a></div><script charset="utf-8" src="https://widgets.2gis.com/js/DGWidgetLoader.js"></script><script charset="utf-8">new DGWidgetLoader({"width":"100%","height":"100%","borderColor":"#a3a3a3","pos":{"lat":42.94511439522653,"lon":74.62008476257326,"zoom":16},"opt":{"city":"bishkek"},"org":[{"id":"70000001019320323"}]});</script><noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. Включите его в настройках вашего браузера.</noscript>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 AutoGlass.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        // Video gallery interaction effect
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            const video = item.querySelector('video');
+            
+            item.addEventListener('mouseenter', () => {
+                video.play();
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                video.pause();
+                video.currentTime = 0;
+            });
+            
+            // For touch devices
+            item.addEventListener('touchend', () => {
+                item.classList.toggle('tap-active');
+                if (item.classList.contains('tap-active')) {
+                    video.play();
+                } else {
+                    video.pause();
+                    video.currentTime = 0;
+                }
+            });
+        });
+        // Form submission handler
+        const requestForm = document.getElementById('requestForm');
+        if (requestForm) {
+            requestForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+                this.reset();
+            });
+        }
+    </script>
+</body>
+</html>
+

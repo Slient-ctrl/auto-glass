@@ -11,6 +11,7 @@
                 cursor: default;
             }
         }
+
         :root {
             --primary-color: #2C3E50;
             --accent-color: #3498DB;
@@ -18,19 +19,19 @@
             --text-color: #333333;
             --white: #FFFFFF;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Arial', sans-serif;
         }
-        
+
         body {
             color: var(--text-color);
             line-height: 1.6;
         }
-        
+
         /* Header styles */
         header {
             background-color: var(--white);
@@ -40,40 +41,40 @@
             z-index: 1000;
             padding: 15px 0;
         }
-        
+
         .container {
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .logo {
             font-size: 24px;
             font-weight: bold;
             color: var(--primary-color);
         }
-        
+
         .logo span {
             color: var(--accent-color);
         }
-        
+
         nav ul {
             display: flex;
             list-style: none;
             gap: 15px;
             padding: 0 10px;
         }
-        
+
         nav ul li {
             margin-left: 30px;
         }
-        
+
         nav ul li a {
             text-decoration: none;
             color: var(--primary-color);
@@ -81,11 +82,11 @@
             transition: color 0.3s;
             font-size: 14px;
         }
-        
+
         nav ul li a:hover {
             color: var(--accent-color);
         }
-        
+
         .cta-button {
             background-color: var(--accent-color);
             color: var(--white);
@@ -98,11 +99,11 @@
             text-decoration: none;
             display: inline-block;
         }
-        
+
         .cta-button:hover {
             background-color: #2980B9;
         }
-        
+
         /* Hero section */
         .hero {
             background-color: var(--primary-color);
@@ -110,35 +111,35 @@
             padding: 120px 0 80px;
             text-align: center;
         }
-        
+
         .hero h1 {
             font-size: 42px;
             margin-bottom: 20px;
         }
-        
+
         .hero p {
             font-size: 18px;
             max-width: 700px;
             margin: 0 auto 30px;
         }
-        
+
         /* Benefits section */
         .benefits {
             padding: 80px 0;
         }
-        
+
         .section-title {
             text-align: center;
             margin-bottom: 60px;
             color: var(--primary-color);
         }
-        
+
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
         }
-        
+
         .benefit-card {
             background-color: var(--white);
             border-radius: 8px;
@@ -147,11 +148,11 @@
             text-align: center;
             transition: transform 0.3s;
         }
-        
+
         .benefit-card:hover {
             transform: translateY(-5px);
         }
-        
+
         .benefit-icon {
             width: 70px;
             height: 70px;
@@ -164,24 +165,24 @@
             color: var(--white);
             font-size: 30px;
         }
-        
+
         .benefit-card h3 {
             margin-bottom: 15px;
             color: var(--primary-color);
         }
-        
+
         /* Gallery section */
         .gallery {
             padding: 80px 0;
             background-color: var(--light-color);
         }
-        
+
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
         }
-        
+
         .gallery-item {
             position: relative;
             overflow: hidden;
@@ -189,14 +190,14 @@
             height: 250px;
             cursor: pointer;
         }
-        
+
         .gallery-thumbnail {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: opacity 0.3s;
         }
-        
+
         .gallery-video {
             position: absolute;
             top: 0;
@@ -206,27 +207,49 @@
             object-fit: cover;
             display: none;
         }
-        
-        @media (hover: hover) {
-            .gallery-item:hover .gallery-thumbnail {
-                opacity: 0;
-            }
-            
-            .gallery-item:hover .gallery-video {
-                display: block;
-            }
+
+        /* Video modal styles */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
         }
-        
-        /* For touch devices */
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-modal-content {
+            width: 90%;
+            max-width: 900px;
+            position: relative;
+        }
+
+        .video-modal video {
+            width: 100%;
+            max-height: 90vh;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        /* Mobile behavior */
         @media (hover: none) {
-            .gallery-item.tap-active {
-                pointer-events: none;
-            }
-            .gallery-item.tap-active .gallery-thumbnail {
-                opacity: 0;
-            }
-            .gallery-item.tap-active .gallery-video {
-                display: block;
+            .gallery-item .gallery-video {
+                display: none !important;
             }
         }
 
@@ -235,24 +258,24 @@
             padding: 80px 0;
             background-color: var(--light-color);
         }
-        
+
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
         }
-        
+
         .contact-info h3 {
             color: var(--primary-color);
             margin-bottom: 20px;
         }
-        
+
         .contact-item {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
         }
-        
+
         .contact-icon {
             width: 40px;
             height: 40px;
@@ -264,24 +287,7 @@
             color: var(--white);
             margin-right: 15px;
         }
-        
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 12px 15px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            -webkit-appearance: none;
-            appearance: none;
-        }
-        
-        .contact-form textarea {
-            height: 120px;
-            resize: vertical;
-        }
-        
+
         /* Footer */
         footer {
             background-color: var(--primary-color);
@@ -289,12 +295,13 @@
             padding: 30px 0;
             text-align: center;
         }
-        
+
         /* Responsive styles */
         @media (max-width: 768px) {
             .logo {
                 font-size: 20px;
             }
+
             .header-content {
                 gap: 10px;
             }
@@ -309,243 +316,254 @@
                 width: 100%;
                 text-align: center;
             }
+
             nav ul li a {
                 font-size: 13px;
             }
+
             .hero {
-                padding: 260px 80px 60px;
+                padding: 260px 0 60px;
             }
+
             .hero h1 {
                 font-size: 32px;
             }
-            
+
             .hero p {
                 font-size: 16px;
-            }
-            .contact-form input,
-            .contact-form textarea {
-                padding: 10px 12px;
-                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">Auto<span>Glass</span></div>
-                <nav>
-                    <ul>
-                        <li><a href="#benefits">Преимущества</a></li>
-                        <li><a href="#gallery">Наши работы</a></li>
-                        <!-- <li><a href="#pricing">Цены</a></li> -->
-                        <li><a href="#contacts">Контакты</a></li>
-                    </ul>
-                </nav>
-                <a href="tel:+996700920027" class="cta-button" id="call-button">Позвонить</a>
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">Auto<span>Glass</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#benefits">Преимущества</a></li>
+                    <li><a href="#gallery">Наши работы</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+            <a href="tel:+996700920027" class="cta-button" id="call-button">Позвонить</a>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <h1>Профессиональная замена автостекол</h1>
+        <p>Быстро, качественно и с гарантией установим новое стекло на ваш автомобиль. С использованием проверенных
+            годами материалов.</p>
+        <a href="#contacts" class="cta-button">Оставить заявку</a>
+    </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="benefits" id="benefits">
+    <div class="container">
+        <h2 class="section-title">Наши преимущества</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">✓</div>
+                <h3>Оригинальные стекла</h3>
+                <p>Работаем только с проверенными поставщиками и используем оригинальные стекла или качественные
+                    аналоги.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">+</div>
+                <h3>Без сквозняков</h3>
+                <p>Герметичная установка исключает появление свиста и сквозняков на высоких скоростях.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">%</div>
+                <h3>Гарантия 3 года</h3>
+                <p>Предоставляем официальную гарантию на все виды работ по замене автостекол.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">⛟</div>
+                <h3>Выезд по городу</h3>
+                <p><strong>Установим стекло прямо у вас на месте</strong> — быстро и удобно. <br>Выезд по городу всего
+                    за <span style="color: var(--accent-color); font-weight: bold;">+2000 сом</span>.</p>
             </div>
         </div>
-    </header>
+    </div>
+</section>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Профессиональная замена автостекол</h1>
-            <p>Быстро, качественно и с гарантией. Вернем прозрачность вашему обзору с использованием оригинальных материалов и современных технологий.</p>
-            <a href="#contacts" class="cta-button">Оставить заявку</a>
-        </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section class="benefits" id="benefits">
-        <div class="container">
-            <h2 class="section-title">Наши преимущества</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">✓</div>
-                    <h3>Оригинальные стекла</h3>
-                    <p>Работаем только с проверенными поставщиками и используем оригинальные стекла или качественные аналоги.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">⚡</div>
-                    <h3>Экспресс-замена</h3>
-                    <p>Замена лобового стекла за 60 минут с выездом к вам или в нашем сервисе.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">+</div>
-                    <h3>Без сквозняков</h3>
-                    <p>Герметичная установка исключает появление свиста и сквозняков на высоких скоростях.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">%</div>
-                    <h3>Гарантия 3 года</h3>
-                    <p>Предоставляем официальную гарантию на все виды работ по замене автостекол.</p>
-                </div>
+<!-- Gallery Section -->
+<section class="gallery" id="gallery">
+    <div class="container">
+        <h2 class="section-title">Наши работы</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item" data-video="videos/lx460h-video1.mp4">
+                <img class="gallery-thumbnail" src="thumbnails/lx460h-video1.png" alt="Процесс замены стекла">
+                <video class="gallery-video" loop muted playsinline>
+                    <source src="videos/lx460h-video1.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" data-video="videos/prado-video2.mp4">
+                <img class="gallery-thumbnail" src="thumbnails/prado-video2.png" alt="Процесс замены стекла">
+                <video class="gallery-video" loop muted playsinline>
+                    <source src="videos/prado-video2.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" data-video="videos/audiq7-video3.mp4">
+                <img class="gallery-thumbnail" src="thumbnails/audiq7-video3.png" alt="Процесс замены стекла">
+                <video class="gallery-video" loop muted playsinline>
+                    <source src="videos/audiq7-video3.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" data-video="videos/lx570-video4.mp4">
+                <img class="gallery-thumbnail" src="thumbnails/lx570-video4.png" alt="Процесс замены стекла">
+                <video class="gallery-video" loop muted playsinline>
+                    <source src="videos/lx570-video4.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" data-video="videos/camry40_2010-video5.mp4">
+                <img class="gallery-thumbnail" src="thumbnails/camry40_2010-video5.png" alt="Процесс замены стекла">
+                <video class="gallery-video" loop muted playsinline>
+                    <source src="videos/camry40_2010-video5.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" data-video="videos/avalon-video6.mp4">
+                <img class="gallery-thumbnail" src="thumbnails/avalon-video6.png" alt="Процесс замены стекла">
+                <video class="gallery-video" loop muted playsinline>
+                    <source src="videos/avalon-video6.mp4" type="video/mp4">
+                </video>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Gallery Section -->
-    <section class="gallery" id="gallery">
-        <div class="container">
-            <h2 class="section-title">Наши работы</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img class="gallery-thumbnail" src="thumbnails/220h-video1.png" alt="Процесс замены стекла">
-                    <video class="gallery-video" loop muted>
-                        <source src="videos/lx460h-video1.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="gallery-item">
-                    <img class="gallery-thumbnail" src="thumbnails/prado-video2.png" alt="Процесс замены стекла">
-                    <video class="gallery-video" loop muted>
-                        <source src="videos/prado-video2.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="gallery-item">
-                    <img class="gallery-thumbnail" src="thumbnails/audiq7-video3.png" alt="Процесс замены стекла">
-                    <video class="gallery-video" loop muted>
-                        <source src="videos/audiq7-video3.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="gallery-item">
-                    <img class="gallery-thumbnail" src="thumbnails/lx570-video4.png" alt="Процесс замены стекла">
-                    <video class="gallery-video" loop muted>
-                        <source src="videos/lx570-video4.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="gallery-item">
-                    <img class="gallery-thumbnail" src="thumbnails/camry40_2010-video5.png" alt="Процесс замены стекла">
-                    <video class="gallery-video" loop muted>
-                        <source src="videos/camry40_2010-video5.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="gallery-item">
-                    <img class="gallery-thumbnail" src="thumbnails/avalon-video6.png" alt="Процесс замены стекла">
-                    <video class="gallery-video" loop muted>
-                        <source src="videos/avalon-video6.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Video Modal -->
+<div class="video-modal" id="videoModal">
+    <div class="video-modal-content">
+        <span class="close-modal">&times;</span>
+        <video controls autoplay id="modalVideo">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
 
-    <!-- Contacts Section -->
-    <section class="contacts" id="contacts">
-        <div class="container">
-            <h2 class="section-title">Контакты</h2>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h3>Свяжитесь с нами</h3>
-                    <div class="contact-item">
-                        <div class="contact-icon">@</div>
-                        <div>
-                            <strong>Адрес:</strong> г. Бишкек, Рынок Дордой (Автостекла), ул. Кожевенная, 76/2
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">✆</div>
-                        <div>
-                            <strong>Телефон:</strong> +996 (700) 92-00-27 | +996 (702) 52-95-55
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">✉</div>
-                        <div>
-                            <strong>Email:</strong> vante@mail.ru
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">🕒</div>
-                        <div>
-                            <strong>Режим работы:</strong> Пн-Вс: 9:00-15:00, Пятница - Выходной
-                        </div>
+<!-- Contacts Section -->
+<section class="contacts" id="contacts">
+    <div class="container">
+        <h2 class="section-title">Контакты</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Свяжитесь с нами</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">@</div>
+                    <div>
+                        <strong>Адрес:</strong> г. Бишкек, Рынок Дордой (Автостекла), ул. Кожевенная, 76/2
                     </div>
                 </div>
-                <div class="contact-form">
-                    <h3>Оставьте заявку</h3>
-                    <form id="requestForm">
-                        <input type="text" placeholder="Ваше имя" required>
-                        <input type="tel" placeholder="Ваш телефон" required>
-                        <input type="email" placeholder="Ваш email">
-                        <textarea placeholder="Опишите проблему или выберите услугу"></textarea>
-                        <button type="submit" class="cta-button">Отправить</button>
-                    </form>
+                <div class="contact-item">
+                    <div class="contact-icon">✆</div>
+                    <div>
+                        <strong>Телефон:</strong> +996 (700) 92-00-27 | +996 (702) 52-95-55 9:00-15:00
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✉</div>
+                    <div>
+                        <strong>Email:</strong> vante@mail.ru
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🕒</div>
+                    <div>
+                        <strong>Режим работы:</strong> Пн-Вс: 9:00-15:00, Пятница - Выходной
+                    </div>
                 </div>
             </div>
-            <div class="map" style="margin-top: 40px; height: 450px; background-color: #ddd; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
-                <a class="dg-widget-link" href="http://2gis.kg/bishkek/firm/70000001019320323/center/74.62008476257326,42.94511439522653/zoom/16?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap">Посмотреть на карте Бишкека</a><div class="dg-widget-link"><a href="http://2gis.kg/bishkek/firm/70000001019320323/photos/70000001019320323/center/74.62008476257326,42.94511439522653/zoom/17?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=photos">Фотографии компании</a></div><div class="dg-widget-link"><a href="http://2gis.kg/bishkek/center/74.620079,42.944532/zoom/16/routeTab/rsType/bus/to/74.620079,42.944532╎Центр установки и продажи автостекол?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route">Найти проезд до Центр установки и продажи автостекол</a></div><script charset="utf-8" src="https://widgets.2gis.com/js/DGWidgetLoader.js"></script><script charset="utf-8">new DGWidgetLoader({"width":"100%","height":"100%","borderColor":"#a3a3a3","pos":{"lat":42.94511439522653,"lon":74.62008476257326,"zoom":16},"opt":{"city":"bishkek"},"org":[{"id":"70000001019320323"}]});</script><noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. Включите его в настройках вашего браузера.</noscript>
-            </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>© 2025 AutoGlass.</p>
+        <div class="map"
+             style="margin-top: 40px; height: 450px; background-color: #ddd; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+            <a class="dg-widget-link"
+               href="http://2gis.kg/bishkek/firm/70000001019320323/center/74.62008476257326,42.94511439522653/zoom/16?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap">Посмотреть
+                на карте Бишкека</a>
+            <div class="dg-widget-link"><a
+                    href="http://2gis.kg/bishkek/firm/70000001019320323/photos/70000001019320323/center/74.62008476257326,42.94511439522653/zoom/17?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=photos">Фотографии
+                компании</a></div>
+            <div class="dg-widget-link"><a
+                    href="http://2gis.kg/bishkek/center/74.620079,42.944532/zoom/16/routeTab/rsType/bus/to/74.620079,42.944532╎Центр установки и продажи автостекол?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route">Найти
+                проезд до Центр установки и продажи автостекол</a></div>
+            <script charset="utf-8" src="https://widgets.2gis.com/js/DGWidgetLoader.js"></script>
+            <script charset="utf-8">new DGWidgetLoader({
+                "width": "100%",
+                "height": "100%",
+                "borderColor": "#a3a3a3",
+                "pos": {"lat": 42.94511439522653, "lon": 74.62008476257326, "zoom": 16},
+                "opt": {"city": "bishkek"},
+                "org": [{"id": "70000001019320323"}]
+            });</script>
+            <noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. Включите
+                его в настройках вашего браузера.
+            </noscript>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <script>
-        // Меняем ссылку кнопки "Позвонить" на десктопе
-        document.addEventListener("DOMContentLoaded", function () {
-            const callButton = document.getElementById("call-button");
-            if (window.innerWidth >= 769) {
-                callButton.setAttribute("href", "#contacts");
-            }
-        });
-        // Smooth scrolling for anchor links
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <p>© 2025 AutoGlass.</p>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const callButton = document.getElementById("call-button");
+        if (window.innerWidth >= 769) {
+            callButton.setAttribute("href", "#contacts");
+        }
+
+        // Плавный скролл
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                document.querySelector(this.getAttribute('href')).scrollIntoView({behavior: 'smooth'});
             });
         });
-        // Video gallery interaction effect
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            const video = item.querySelector('video');
-            
-            item.addEventListener('mouseenter', () => {
-                video.play();
-            });
-            
-            item.addEventListener('mouseleave', () => {
-                video.pause();
-                video.currentTime = 0;
-            });
-            
-            // For touch devices
-            item.addEventListener('touchend', () => {
-                item.classList.toggle('tap-active');
-                if (item.classList.contains('tap-active')) {
-                    video.play();
-                } else {
-                    video.pause();
-                    video.currentTime = 0;
-                }
+
+        const videoModal = document.getElementById("videoModal");
+        const modalVideo = document.getElementById("modalVideo");
+        const closeModal = document.querySelector(".close-modal");
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        // Клик по любой карточке — открытие видео
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function () {
+                const videoSrc = this.getAttribute('data-video');
+                modalVideo.src = videoSrc;
+                videoModal.classList.add('active');
+                modalVideo.play().catch(e => console.log("Autoplay prevented:", e));
             });
         });
-        // Form submission handler
-        const requestForm = document.getElementById('requestForm');
-        if (requestForm) {
-            requestForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
-                this.reset();
-            });
-        }
-    </script>
+
+        // Закрытие модального окна
+        closeModal.addEventListener('click', () => {
+            videoModal.classList.remove('active');
+            modalVideo.pause();
+            modalVideo.currentTime = 0;
+            modalVideo.removeAttribute('src');
+        });
+
+        // Клик вне видео — закрыть
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                videoModal.classList.remove('active');
+                modalVideo.pause();
+                modalVideo.currentTime = 0;
+                modalVideo.removeAttribute('src');
+            }
+        });
+    });
+</script>
 </body>
 </html>
-
